@@ -12,7 +12,8 @@ module Moderator
     end
 
     def banish
-      return unless user.comments.where("created_at < ?", 150.days.ago).empty?
+      puts "!!!!!!!!!!!!!!!!!!!BANISHER!!!!!!!!!!!!!!!!!!!!"
+      # return unless user.comments.where("created_at < ?", 150.days.ago).empty?
       new_name = "spam_#{rand(10000)}"
       new_username = "spam_#{rand(10000)}"
       if User.find_by(name: new_name) || User.find_by(username: new_username)
@@ -54,7 +55,11 @@ module Moderator
         comment.delay.destroy!
       end
       user.follows.each { |follow| follow.delay.destroy! }
-      user.articles.each { |article| article.delay.destroy! }
+      user.articles.each do |article|
+        puts "DESTROY ARTICLE FROM BANISHER!!!!!!!!!!!!!!!!"
+        article.delay.destroy!
+      end
+      puts "!!!!!!!!!!!!!!!!"
       user.remove_from_index!
       user.save!
       CacheBuster.new.bust("/#{user.old_username}")

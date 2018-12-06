@@ -390,6 +390,7 @@ class Article < ApplicationRecord
   # end
 
   def before_destroy_actions
+    puts "HITTING BEFORE ARTICLE DESTROYY"
     bust_cache
     remove_algolia_index
     user.cache_bust_all_articles
@@ -508,13 +509,14 @@ class Article < ApplicationRecord
   end
 
   def bust_cache
-    if Rails.env.production?
+    # if Rails.env.production?
+      puts "I AM RUNNINGGGGGGGGGG BUST_CACHE"
       cache_buster = CacheBuster.new
       cache_buster.bust(path)
       cache_buster.bust(path + "?i=i")
       cache_buster.bust(path + "?preview=" + password)
       async_bust
-    end
+    # end
   end
 
   def calculate_base_scores
@@ -524,7 +526,7 @@ class Article < ApplicationRecord
 
   def async_bust
     CacheBuster.new.bust_article(self)
-    HTTParty.get GeneratedImage.new(self).social_image if published
+    # HTTParty.get GeneratedImage.new(self).social_image if published
   end
   handle_asynchronously :async_bust
 end

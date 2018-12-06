@@ -96,11 +96,11 @@ class Internal::UsersController < Internal::ApplicationController
 
   def banish
     @user = User.find(params[:id])
-    begin
+    # begin
       Moderator::Banisher.call(admin: current_user, offender: @user)
-    rescue StandardError => e
-      flash[:error] = e.message
-    end
+    # rescue StandardError => e
+      # flash[:error] = e.message
+    # end
     redirect_to "/internal/users/#{@user.id}/edit"
   end
 

@@ -71,8 +71,27 @@ module Moderator
       end
     end
 
+    def unsubscribe_from_email
+      notifications = { email_comment_notifications: false,
+                        email_digest_periodic: false,
+                        email_follower_notifications: false,
+                        email_mention_notifications: false,
+                        email_newsletter: false,
+                        email_unread_notifications: false,
+                        email_badge_notifications: false,
+                        email_membership_newsletter: false }
+
+      user.update_columns(notifications)
+    end
+
+    def delete_user
+      delete_reactions
+      delete_comments
+      delete_articles
+    end
+
     def banish
-      # return unless user.comments.where("created_at < ?", 150.days.ago).empty?
+      return unless user.comments.where("created_at < ?", 150.days.ago).empty?
       reassign_and_bust_username
       remove_profile_info
       add_banned_role

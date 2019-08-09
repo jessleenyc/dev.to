@@ -2,25 +2,18 @@
 
 <!--- Please review our contributing guide: https://github.com/thepracticaldev/dev.to/blob/master/CONTRIBUTING.md -->
 
-## What type of PR is this? (check all applicable)
+## Contribution Checklist
 
-- [ ] Refactor
-- [ ] Feature
-- [ ] Bug Fix
-- [ ] Documentation Update
+- [ ] If this is a frontend change, I have accounted for different themes.
+- [ ] I have included/updated appropriate tests for this change.
+- [ ] If applicable, I have updated documentation (readme, API docs, docs.dev.to)
+
+## Related Issue
 
 ## Description
 
-## Related Tickets & Documents
-
 ## Mobile & Desktop Screenshots/Recordings (if there are UI changes)
-
-## Added to documentation?
-
-- [ ] docs.dev.to
-- [ ] readme
-- [ ] no documentation needed
 
 ## [optional] What gif best describes this PR or how it makes you feel?
 
-![alt_text](gif_link)
+![alt-text](gif-link)
